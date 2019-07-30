@@ -4,6 +4,7 @@ from .forms import InputForm
 from bs4 import BeautifulSoup
 import urllib3
 import pandas as pd
+import io
 
 
 def input(request):
@@ -18,7 +19,7 @@ def input(request):
             def level1(url, soup, a):
                 for i in soup.find_all('h2', class_='a-size-mini a-spacing-none a-color-base s-line-clamp-2'):
                     if '/dp/' in i.find('a').attrs['href']:
-                        if a > 5:
+                        if a > 10:
                             break
                         level2(str('https://www.amazon.in' + i.find('a').attrs['href']))
                         a += 1
@@ -173,7 +174,7 @@ def input(request):
             def result():
 
                 data = pd.read_csv('1.csv')
-                scraped_json = data.to_json()
+                #scraped_json = data.to_json()
 
                 #print(scraped_json)
 
@@ -212,12 +213,11 @@ def input(request):
 
                 data['score'] = score
 
-                data = data.sort_values(by=['score'], ascending=False)
+                sorted = data.sort_values(by=['score'], ascending=False)
                 sort_json = data.to_json()
                 #print(sort_json)
 
-                return sort_json
-
+                return sorted
 
             #   CALL   #################################################################
 
@@ -243,11 +243,21 @@ def input(request):
                 n -= 1
             f.close()
 
-            data=result()
+            sorted=result()
+
+            data=pd.read_csv('1.csv')
+            str_io = io.StringIO()
+            data.to_html(buf=str_io, classes='table table-striped')
+            html_str = str_io.getvalue()
+
+            sorted_io = io.StringIO()
+            sorted.to_html(buf=sorted_io, classes='table table-striped')
+            sorted_str = sorted_io.getvalue()
 
             ##############################################################################
 
-            return render(request, 'output.html',{'data':data})
+
+            return render(request, 'output.html', {'html':html_str,'sorted':sorted_str})
     else:
         inputForm = InputForm()
         return render(request, 'Input.html', {'inputForm': inputForm})
