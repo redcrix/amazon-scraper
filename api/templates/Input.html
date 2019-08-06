@@ -1,18 +1,102 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Amazon Products Search</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="shortcut icon" href="{% static 'css/images/favicon.png' %}" type="image/x-icon" />
+
 </head>
 <body>
 
-    <div align="center">
+
+
+	<div class="top-bar">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<div class="left-top">
+						<div class="email-box">
+							<a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> contact@redcrix.com</a>
+						</div>
+						<div class="phone-box">
+							<a href="tel:1234567890"><i class="fa fa-phone" aria-hidden="true"></i> +91 99880 98200</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<div class="right-top">
+						<div class="social-box">
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
+							<ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <header class="header-1">
+            <div class="container">
+                <div class="top-logo">
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'css/images/logos/logo.png'%}" alt="image"></a>
+                </div>
+            </div>
+    </header>
+
+	<div class="slider-area">
+		<div class="banner">
+				<div class="container">
+					<div class="row">
+					 <div class="banner-text">
+
+							<div align="center">
 
   <form action="" method="post">
      {% csrf_token %}
-    {{ inputForm.as_p }}
+    {{ inputForm|crispy }}
       <input type="submit" value="submit">
     </form>
+	</div>
+
+
+
+					   </div>
+
+					</div>
+				</div>
+
+
+
+		</div>
+	</div>
+
+
+
+
+
+    <div class="copyrights">
+        <div class="container">
+            <div class="footer-distributed">
+                <div class="footer-left">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">Redcrix</a> Design & Develop By :
+					<a href="https://html.design/">Redcrix</a></p>
+                </div>
+
+
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
 
 </body>
 </html>
